@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 import h3
 import folium
-from folium.plugins import HeatMapWithTime
 from streamlit_folium import st_folium
 import plotly.express as px
 import plotly.graph_objects as go
@@ -268,40 +267,44 @@ st.plotly_chart(fig_linha, use_container_width=True)
 col_mapa, col_rank = st.columns([3, 1], gap="large")
 
 with col_mapa:
-    st.markdown('<div class="section-title">Mapa de calor animado (mensal)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Mapa de calor — selecione o mês</div>', unsafe_allow_html=True)
 
     if occ_f.empty:
         st.info("Nenhuma ocorrência encontrada para o filtro selecionado.")
     else:
-        meses_ord = sorted(occ_mensal_f["AnoMes_str"].unique())
-        heat_data, meses_validos = [], []
-        for mes in meses_ord:
-            pontos = occ_f[occ_f["AnoMes_str"] == mes][["Latitude", "Longitude"]].values.tolist()
-            if pontos:
-                heat_data.append(pontos)
-                meses_validos.append(mes)
-        meses_ord = meses_validos
+        meses_disp = sorted(occ_f["AnoMes_str"].unique())
+        MESES_PT = {"01":"Jan","02":"Fev","03":"Mar","04":"Abr","05":"Mai","06":"Jun",
+                    "07":"Jul","08":"Ago","09":"Set","10":"Out","11":"Nov","12":"Dez"}
+        meses_label = {m: MESES_PT.get(m[-2:], m) for m in meses_disp}
 
-        centro_lat = occ_f["Latitude"].mean()
-        centro_lon = occ_f["Longitude"].mean()
-
-        mapa = folium.Map(
-            location=[centro_lat, centro_lon],
-            zoom_start=12,
-            tiles="CartoDB dark_matter",
+        mes_sel = st.select_slider(
+            "Mês",
+            options=meses_disp,
+            format_func=lambda m: meses_label[m],
+            label_visibility="collapsed",
         )
-        HeatMapWithTime(
-            heat_data,
-            index=meses_ord,
-            radius=18,
-            min_opacity=0.2,
-            max_opacity=0.9,
-            gradient={0.0: "black", 0.3: "navy", 0.55: "orange", 0.8: "red", 1.0: "white"},
-            use_local_extrema=False,
-            name="Mancha Criminal",
-        ).add_to(mapa)
 
-        st_folium(mapa, width=None, height=480, returned_objects=[])
+        sub = occ_f[occ_f["AnoMes_str"] == mes_sel]
+
+        fig_heat = px.density_mapbox(
+            sub,
+            lat="Latitude",
+            lon="Longitude",
+            radius=18,
+            zoom=11,
+            center={"lat": occ_f["Latitude"].mean(), "lon": occ_f["Longitude"].mean()},
+            mapbox_style="carto-darkmatter",
+            color_continuous_scale=["#000033", "#000080", "#ff6600", "#ff0000", "#ffffff"],
+            opacity=0.75,
+            title=f"Ocorrências · {meses_label[mes_sel]}/2025 · {len(sub):,} registros",
+        )
+        fig_heat.update_layout(
+            height=460,
+            margin=dict(l=0, r=0, t=36, b=0),
+            coloraxis_showscale=False,
+            paper_bgcolor="#0d0d0d",
+        )
+        st.plotly_chart(fig_heat, use_container_width=True)
 
 with col_rank:
     st.markdown('<div class="section-title">Ranking de bairros</div>', unsafe_allow_html=True)
