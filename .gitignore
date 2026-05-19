@@ -1,0 +1,56 @@
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+*.ipynb_checkpoints
+
+# Ambiente Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Arquivos de Sistema e IDEs ---
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+.directory
+
+# Outros
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# --- Dados e Resultados ---
+# Ignorar arquivos de dados locais (csv, xlsx, etc.) para não comitar acidentalmente
+*.csv
+*.xlsx
+*.parquet
+*.h5
+
+# Ignorar banco de dados e arquivos de pickle
+*.pkl
+*.pickle
+*.db
+*.sqlite
+
+# Ignorar pastas de logs e relatórios gerados
+logs/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
