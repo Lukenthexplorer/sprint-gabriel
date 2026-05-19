@@ -198,11 +198,18 @@ st.markdown("#### Rio de Janeiro · 2025 · Análise espaço-temporal por hexág
 st.divider()
 
 # ─── KPIs ─────────────────────────────────────────────────────────────────────
-total_occ    = len(occ_f)
-total_cam    = sen["IDDispositivo"].nunique()
-pico_mes_idx = occ_f.groupby("AnoMes_str").size().idxmax()
-pico_valor   = occ_f.groupby("AnoMes_str").size().max()
-zona_lider   = occ_f["Zona"].value_counts().idxmax().replace("Rio de Janeiro - ", "") if not occ_f.empty else "—"
+total_occ = len(occ_f)
+total_cam = sen["IDDispositivo"].nunique()
+
+if occ_f.empty:
+    pico_mes_idx = "—"
+    pico_valor   = 0
+    zona_lider   = "—"
+else:
+    _mensal      = occ_f.groupby("AnoMes_str").size()
+    pico_mes_idx = _mensal.idxmax()
+    pico_valor   = int(_mensal.max())
+    zona_lider   = occ_f["Zona"].value_counts().idxmax().replace("Rio de Janeiro - ", "")
 
 col1, col2, col3, col4 = st.columns(4)
 kpis = [
@@ -263,32 +270,35 @@ col_mapa, col_rank = st.columns([3, 1], gap="large")
 with col_mapa:
     st.markdown('<div class="section-title">Mapa de calor animado (mensal)</div>', unsafe_allow_html=True)
 
-    meses_ord = sorted(occ_mensal_f["AnoMes_str"].unique())
-    heat_data = []
-    for mes in meses_ord:
-        sub = occ_f[occ_f["AnoMes_str"] == mes]
-        heat_data.append(sub[["Latitude", "Longitude"]].values.tolist())
+    if occ_f.empty:
+        st.info("Nenhuma ocorrência encontrada para o filtro selecionado.")
+    else:
+        meses_ord  = sorted(occ_mensal_f["AnoMes_str"].unique())
+        heat_data  = []
+        for mes in meses_ord:
+            sub = occ_f[occ_f["AnoMes_str"] == mes]
+            heat_data.append(sub[["Latitude", "Longitude"]].values.tolist())
 
-    centro_lat = occ_f["Latitude"].mean()
-    centro_lon = occ_f["Longitude"].mean()
+        centro_lat = occ_f["Latitude"].mean()
+        centro_lon = occ_f["Longitude"].mean()
 
-    mapa = folium.Map(
-        location=[centro_lat, centro_lon],
-        zoom_start=12,
-        tiles="CartoDB dark_matter",
-    )
-    HeatMapWithTime(
-        heat_data,
-        index=meses_ord,
-        radius=18,
-        min_opacity=0.2,
-        max_opacity=0.9,
-        gradient={0.0: "black", 0.3: "navy", 0.55: "orange", 0.8: "red", 1.0: "white"},
-        use_local_extrema=False,
-        name="Mancha Criminal",
-    ).add_to(mapa)
+        mapa = folium.Map(
+            location=[centro_lat, centro_lon],
+            zoom_start=12,
+            tiles="CartoDB dark_matter",
+        )
+        HeatMapWithTime(
+            heat_data,
+            index=meses_ord,
+            radius=18,
+            min_opacity=0.2,
+            max_opacity=0.9,
+            gradient={0.0: "black", 0.3: "navy", 0.55: "orange", 0.8: "red", 1.0: "white"},
+            use_local_extrema=False,
+            name="Mancha Criminal",
+        ).add_to(mapa)
 
-    st_folium(mapa, width=None, height=480, returned_objects=[])
+        st_folium(mapa, width=None, height=480, returned_objects=[])
 
 with col_rank:
     st.markdown('<div class="section-title">Ranking de bairros</div>', unsafe_allow_html=True)
@@ -324,37 +334,42 @@ with col_c:
     st.markdown('<div class="section-title">Trajetória do centróide da mancha</div>', unsafe_allow_html=True)
 
     centroides = calcular_centroide(occ_mensal_f)
-    mapa_cent = folium.Map(
-        location=[centroides["lat"].mean(), centroides["lon"].mean()],
-        zoom_start=12,
-        tiles="CartoDB positron",
-    )
-    coords = centroides[["lat", "lon"]].values.tolist()
-    folium.PolyLine(coords, color="#e94560", weight=3, opacity=0.9).add_to(mapa_cent)
 
-    for _, row in centroides.iterrows():
-        folium.CircleMarker(
-            location=[row["lat"], row["lon"]],
-            radius=5,
-            color="#e94560",
-            fill=True,
-            fill_opacity=0.9,
-            tooltip=f"{row['AnoMes_str']} | {int(row['total'])} ocorrências",
-        ).add_to(mapa_cent)
+    if centroides.empty:
+        st.info("Sem dados suficientes para calcular o centróide.")
+    else:
+        mapa_cent = folium.Map(
+            location=[centroides["lat"].mean(), centroides["lon"].mean()],
+            zoom_start=12,
+            tiles="CartoDB positron",
+        )
+        coords = centroides[["lat", "lon"]].values.tolist()
+        folium.PolyLine(coords, color="#e94560", weight=3, opacity=0.9).add_to(mapa_cent)
 
-    # Marcar ponto inicial e final
-    folium.Marker(
-        coords[0],
-        tooltip="Janeiro/2025",
-        icon=folium.Icon(color="green", icon="play"),
-    ).add_to(mapa_cent)
-    folium.Marker(
-        coords[-1],
-        tooltip="Dezembro/2025",
-        icon=folium.Icon(color="red", icon="stop"),
-    ).add_to(mapa_cent)
+        for _, row in centroides.iterrows():
+            folium.CircleMarker(
+                location=[row["lat"], row["lon"]],
+                radius=5,
+                color="#e94560",
+                fill=True,
+                fill_opacity=0.9,
+                tooltip=f"{row['AnoMes_str']} | {int(row['total'])} ocorrências",
+            ).add_to(mapa_cent)
 
-    st_folium(mapa_cent, width=None, height=380, returned_objects=[])
+        if len(coords) >= 1:
+            folium.Marker(
+                coords[0],
+                tooltip="Janeiro/2025",
+                icon=folium.Icon(color="green", icon="play"),
+            ).add_to(mapa_cent)
+        if len(coords) >= 2:
+            folium.Marker(
+                coords[-1],
+                tooltip="Dezembro/2025",
+                icon=folium.Icon(color="red", icon="stop"),
+            ).add_to(mapa_cent)
+
+        st_folium(mapa_cent, width=None, height=380, returned_objects=[])
 
 with col_cat:
     st.markdown('<div class="section-title">Distribuição por categoria de crime</div>', unsafe_allow_html=True)
