@@ -273,11 +273,14 @@ with col_mapa:
     if occ_f.empty:
         st.info("Nenhuma ocorrência encontrada para o filtro selecionado.")
     else:
-        meses_ord  = sorted(occ_mensal_f["AnoMes_str"].unique())
-        heat_data  = []
+        meses_ord = sorted(occ_mensal_f["AnoMes_str"].unique())
+        heat_data, meses_validos = [], []
         for mes in meses_ord:
-            sub = occ_f[occ_f["AnoMes_str"] == mes]
-            heat_data.append(sub[["Latitude", "Longitude"]].values.tolist())
+            pontos = occ_f[occ_f["AnoMes_str"] == mes][["Latitude", "Longitude"]].values.tolist()
+            if pontos:
+                heat_data.append(pontos)
+                meses_validos.append(mes)
+        meses_ord = meses_validos
 
         centro_lat = occ_f["Latitude"].mean()
         centro_lon = occ_f["Longitude"].mean()
