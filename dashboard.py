@@ -258,19 +258,22 @@ if not occ_f.empty:
     )
     st.plotly_chart(fig_linha, use_container_width=True)
 
+# ─── Pré-computar agg (usado em mapa, ranking e centróide) ───────────────────
+if not occ_f.empty:
+    agg = agregar_mensal(occ_f, cam_por_celula)
+    agg = agg.merge(bairro_por_celula, on="h3_cell", how="left")
+else:
+    agg = pd.DataFrame()
+
 # ─── Mapa choropleth animado + Ranking ───────────────────────────────────────
 col_mapa, col_rank = st.columns([3, 1], gap="large")
 
 with col_mapa:
     st.markdown('<div class="section-title">Mancha criminal por hexágono H3 (animação mensal)</div>', unsafe_allow_html=True)
 
-    if occ_f.empty:
+    if agg.empty:
         st.info("Nenhuma ocorrência encontrada para o filtro selecionado.")
     else:
-        agg = agregar_mensal(occ_f, cam_por_celula)
-
-        # Bairro como hover
-        agg = agg.merge(bairro_por_celula, on="h3_cell", how="left")
 
         geojson = build_geojson(tuple(agg["h3_cell"].unique()))
 
@@ -309,16 +312,19 @@ with col_mapa:
             ),
             paper_bgcolor="#0d0d0d",
         )
-        # Velocidade da animação
-        fig_mapa.layout.updatemenus[0].buttons[0].args[1]["frame"]["duration"] = 800
-        fig_mapa.layout.updatemenus[0].buttons[0].args[1]["transition"]["duration"] = 300
+        # Ajustar velocidade da animação com segurança
+        try:
+            fig_mapa.layout.updatemenus[0].buttons[0].args[1]["frame"]["duration"] = 800
+            fig_mapa.layout.updatemenus[0].buttons[0].args[1]["transition"]["duration"] = 300
+        except (IndexError, KeyError):
+            pass
 
         st.plotly_chart(fig_mapa, use_container_width=True)
 
 with col_rank:
     st.markdown('<div class="section-title">Ranking de bairros</div>', unsafe_allow_html=True)
 
-    if occ_f.empty:
+    if agg.empty:
         st.info("Sem dados.")
     else:
         delta_df = calcular_delta(agg, bairro_por_celula)
@@ -344,7 +350,7 @@ col_c, col_cat = st.columns(2, gap="large")
 with col_c:
     st.markdown('<div class="section-title">Trajetória do centróide da mancha</div>', unsafe_allow_html=True)
 
-    if occ_f.empty:
+    if agg.empty:
         st.info("Sem dados suficientes.")
     else:
         centroides = calcular_centroide(agg)
