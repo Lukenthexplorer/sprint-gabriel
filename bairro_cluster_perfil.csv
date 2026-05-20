@@ -1,0 +1,45 @@
+bairro,bairro_norm,zona,cluster_id,perfil_descritivo,total_ocorrencias,ocorrencias_por_mes,camaleoes_total
+Andaraí,ANDARAI,Rio de Janeiro - Zona Norte,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",95,3.1666666666666665,32.0
+Barra da Tijuca,BARRA DA TIJUCA,Rio de Janeiro - Zona Oeste,1,"Bairros urbanos intensos, com alto volume de ocorrências e forte presença de Camaleões.",814,24.666666666666668,618.0
+Barra Olímpica,BARRA OLIMPICA,Rio de Janeiro - Zona Oeste,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",117,4.875,55.0
+Botafogo,BOTAFOGO,Rio de Janeiro - Zona Sul,1,"Bairros urbanos intensos, com alto volume de ocorrências e forte presença de Camaleões.",626,12.27450980392157,210.0
+Cachambi,CACHAMBI,Rio de Janeiro - Zona Norte,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",115,4.791666666666667,34.0
+Catete,CATETE,Rio de Janeiro - Zona Sul,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",69,2.3,22.0
+Centro,CENTRO,Rio de Janeiro - Centro,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",229,6.9393939393939394,131.0
+Copacabana,COPACABANA,Rio de Janeiro - Zona Sul,1,"Bairros urbanos intensos, com alto volume de ocorrências e forte presença de Camaleões.",1565,27.45614035087719,342.0
+Del Castilho,DEL CASTILHO,Rio de Janeiro - Zona Norte,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",37,1.85,7.0
+Engenho de Dentro,ENGENHO DE DENTRO,Rio de Janeiro - Zona Norte,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",62,3.263157894736842,13.0
+Engenho Novo,ENGENHO NOVO,Rio de Janeiro - Zona Norte,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",39,2.1666666666666665,8.0
+Flamengo,FLAMENGO,Rio de Janeiro - Zona Sul,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",492,9.647058823529411,134.0
+Freguesia de Jacarepaguá,FREGUESIA DE JACAREPAGUA,Rio de Janeiro - Zona Oeste,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",204,7.0344827586206895,104.0
+Gávea,GAVEA,Rio de Janeiro - Zona Sul,1,"Bairros urbanos intensos, com alto volume de ocorrências e forte presença de Camaleões.",220,4.4,78.0
+Glória,GLORIA,Rio de Janeiro - Zona Sul,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",73,2.28125,14.0
+Grajaú,GRAJAU,Rio de Janeiro - Zona Norte,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",115,3.59375,51.0
+Humaitá,HUMAITA,Rio de Janeiro - Zona Sul,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",122,2.9047619047619047,46.0
+Ipanema,IPANEMA,Rio de Janeiro - Zona Sul,1,"Bairros urbanos intensos, com alto volume de ocorrências e forte presença de Camaleões.",1299,18.82608695652174,445.0
+Itanhangá,ITANHANGA,Rio de Janeiro - Zona Oeste,3,Bairros com atividade recorrente em áreas públicas e maior concentração em determinados horários.,34,2.125,7.0
+Jacarepaguá,JACAREPAGUA,Rio de Janeiro - Zona Oeste,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",58,3.0526315789473686,43.0
+Jardim Botânico,JARDIM BOTANICO,Rio de Janeiro - Zona Sul,1,"Bairros urbanos intensos, com alto volume de ocorrências e forte presença de Camaleões.",447,7.982142857142857,222.0
+Jardim Sulacap,JARDIM SULACAP,Rio de Janeiro - Zona Oeste,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",30,2.727272727272727,18.0
+Lagoa,LAGOA,Rio de Janeiro - Zona Sul,1,"Bairros urbanos intensos, com alto volume de ocorrências e forte presença de Camaleões.",469,7.9491525423728815,166.0
+Laranjeiras,LARANJEIRAS,Rio de Janeiro - Zona Sul,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",250,5.813953488372093,85.0
+Leblon,LEBLON,Rio de Janeiro - Zona Sul,1,"Bairros urbanos intensos, com alto volume de ocorrências e forte presença de Camaleões.",1160,16.11111111111111,384.0
+Leme,LEME,Rio de Janeiro - Zona Sul,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",236,5.0212765957446805,43.0
+Maracanã,MARACANA,Rio de Janeiro - Zona Norte,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",364,9.1,72.0
+Méier,MEIER,Rio de Janeiro - Zona Norte,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",124,5.391304347826087,36.0
+Pechincha,PECHINCHA,Rio de Janeiro - Zona Oeste,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",53,3.1176470588235294,27.0
+Praça da Bandeira,PRACA DA BANDEIRA,Rio de Janeiro - Zona Norte,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",42,1.826086956521739,17.0
+Praça Seca,PRACA SECA,Rio de Janeiro - Zona Oeste,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",31,2.2142857142857144,16.0
+Recreio dos Bandeirantes,RECREIO DOS BANDEIRANTES,Rio de Janeiro - Zona Oeste,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",259,10.36,222.0
+Riachuelo,RIACHUELO,Rio de Janeiro - Zona Norte,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",34,1.7894736842105263,7.0
+Rio Comprido,RIO COMPRIDO,Rio de Janeiro - Centro,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",122,4.6923076923076925,28.0
+Santa Teresa,SANTA TERESA,Rio de Janeiro - Centro,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",55,2.619047619047619,31.0
+Santo Cristo,SANTO CRISTO,Rio de Janeiro - Centro,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",40,2.2222222222222223,24.0
+São Conrado,SAO CONRADO,Rio de Janeiro - Zona Sul,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",137,3.0444444444444443,74.0
+São Francisco Xavier,SAO FRANCISCO XAVIER,Rio de Janeiro - Zona Norte,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",32,2.2857142857142856,8.0
+Taquara,TAQUARA,Rio de Janeiro - Zona Oeste,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",183,7.625,80.0
+Tijuca,TIJUCA,Rio de Janeiro - Zona Norte,1,"Bairros urbanos intensos, com alto volume de ocorrências e forte presença de Camaleões.",1249,29.738095238095237,310.0
+Todos os Santos,TODOS OS SANTOS,Rio de Janeiro - Zona Norte,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",110,3.9285714285714284,23.0
+Urca,URCA,Rio de Janeiro - Zona Sul,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",52,1.9259259259259258,28.0
+Vargem Grande,VARGEM GRANDE,Rio de Janeiro - Zona Oeste,0,"Bairros com atividade moderada, perfil misto e ocorrências distribuídas ao longo do dia.",36,2.25,30.0
+Vila Isabel,VILA ISABEL,Rio de Janeiro - Zona Norte,2,"Bairros residenciais ou de menor movimento, com volume mais baixo de ocorrências.",214,6.6875,77.0
